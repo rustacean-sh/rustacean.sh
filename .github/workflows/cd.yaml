@@ -1,0 +1,62 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup Rust Cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Setup Cargo Binstall
+        uses: cargo-bins/cargo-binstall@main
+
+      - name: Install Rust Binaries
+        run: |
+          cargo binstall -y --force trunk
+          cargo binstall -y --force worker-build
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Server - Install Dependencies
+        working-directory: ./crates/server
+        run: bun i
+
+      - name: Server - Build Cloudflare Worker
+        working-directory: ./crates/server
+        run: worker-build
+
+      - name: Client - Build Web UI
+        working-directory: ./crates/client
+        run: trunk build --release
+
+      - name: Deploy Server
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: ./crates/server
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy Client
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
+          workingDirectory: ./crates/client
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

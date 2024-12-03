@@ -1,0 +1,9 @@
+# Directories
+build
+dist
+node_modules
+target
+
+# Files
+.DS_Store
+.wrangler
