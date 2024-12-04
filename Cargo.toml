@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "crates/client",
+    "crates/proto",
     "crates/server"
 ]
 resolver = "2"
@@ -23,3 +24,5 @@ worker-macros = "0.4.2"
 wasm-bindgen = "0.2"
 wasm-bindgen-test = "0.3"
 web-sys = "0.3"
+
+proto = { path = "./crates/proto" }

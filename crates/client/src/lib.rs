@@ -3,14 +3,8 @@ use leptos::{
 };
 use leptos_meta::provide_meta_context;
 use reqwest::get;
-use serde::Deserialize;
 
-#[derive(Clone, Deserialize)]
-pub struct Rustacean {
-    pub name: String,
-    pub image: String,
-    pub github_url: String,
-}
+use proto::Rustacean;
 
 #[component]
 pub fn App() -> impl IntoView {
