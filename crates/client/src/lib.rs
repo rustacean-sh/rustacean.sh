@@ -39,13 +39,14 @@ pub fn App() -> impl IntoView {
 
     view! {
         <h1 class="flex flex-col justify-center items-center bg-gray-800 text-white h-screen w-screen font-bold">
-            <code class="text-2xl py-4">"rustaceans.sh"</code>
+            <code class="text-2xl py-4">"rustacean.sh"</code>
+            <p>"The Rustacean Hub, for contributors, projects and news."</p>
             <Show when=move || error.get().is_none() fallback=move || view! {
                 <span class="bg-rose-600 text-white p-4 rounded-md">
                     {error.get().unwrap_or_default()}
                 </span>
             }>
-                <ul class="py-4 w-10/12 md:w-[300px] mx-auto">
+                <ul class="py-4 space-y-4 w-10/12 md:w-[300px] mx-auto">
                     <For
                         key=|rus: &Rustacean| rus.name.clone()
                         each=move || rustaceans.get()
@@ -55,9 +56,9 @@ pub fn App() -> impl IntoView {
                                     <figure class="h-[70px] w-[70px] rounded-full overflow-hidden">
                                         <img height="70" width="70" src={rus.image} alt={rus.name.clone()} />
                                     </figure>
-                                    <article class="flex flex-col items-start">
+                                    <article class="flex flex-col items-start justify-center">
                                         <strong>{rus.name}</strong>
-                                        <a class="text-md underline" target="blank" href={rus.github_url}>
+                                        <a class="font-medium text-sm underline" target="blank" href={rus.github_url}>
                                             "GitHub"
                                         </a>
                                     </article>
