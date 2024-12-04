@@ -251,6 +251,7 @@ dependencies = [
  "leptos",
  "leptos_meta",
  "leptos_router",
+ "proto",
  "reqwest",
  "serde",
  "serde_json",
@@ -1546,6 +1547,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "proto"
+version = "0.0.0"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "quote"
 version = "1.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1953,6 +1962,7 @@ dependencies = [
  "axum",
  "console_error_panic_hook",
  "http",
+ "proto",
  "serde",
  "serde_json",
  "tower-http",

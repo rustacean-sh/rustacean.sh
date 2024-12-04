@@ -1,7 +1,30 @@
 <h1 align=center><code>rustacean.sh</code></h1>
 <p align=center>Rustaceans Network</p>
 
-## Prerequisites
+## Development
+
+### Running Locally
+
+> [!IMPORTANT]
+> Make sure you have gone through the [Prerequisites](#prerequisites) section before
+> running the following commands.
+
+This project uses a Client ↔ Server architecture, two process (one for each of these components)
+should be runned in order to run the application locally.
+
+Create a terminal session for the client, and run the following command:
+
+```bash
+just client
+```
+
+Then create another terminal session for the server, and run the following command:
+
+```bash
+just server
+```
+
+### Prerequisites
 
 1. [Rust](https://rustup.rs)
 2. [Bun](https://bun.sh)
