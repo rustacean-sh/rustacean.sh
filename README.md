@@ -18,7 +18,17 @@ Create a terminal session for the client, and run the following command:
 just client
 ```
 
-Then create another terminal session for the server, and run the following command:
+Then create another terminal session and navigate to the server crate
+
+```bash
+cd crates/server/
+```
+Install the dependencies using Bun
+
+ ```bash
+bun install
+```
+and run the following command:
 
 ```bash
 just server
