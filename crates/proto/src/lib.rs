@@ -4,7 +4,7 @@ use std::hash::Hash;
 use serde::{Deserialize, Serialize};
 use url::Url;
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub struct Rustacean {
     pub name: String,
     pub gh_user: String,
@@ -20,7 +20,7 @@ pub enum SocialNetwork {
     Custom { url: Url },
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub struct Location {
     continent: Continent,
     country: Option<Country>,
@@ -28,7 +28,7 @@ pub struct Location {
     timezone: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub enum Continent {
     NorthAmerica,
     SouthAmerica,
@@ -38,12 +38,12 @@ pub enum Continent {
     Oceania,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub struct Country {
     name: String,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub struct City {
     name: String,
 }
