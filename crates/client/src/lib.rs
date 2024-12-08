@@ -52,7 +52,7 @@ pub fn App() -> impl IntoView {
                                     </figure>
                                     <article class="flex flex-col items-start justify-center">
                                         <strong>{rus.name}</strong>
-                                        <a class="font-medium text-sm underline" target="blank" href={rus.github_url}>
+                                        <a class="font-medium text-sm underline" target="blank" href={rus.gh_user}>
                                             "GitHub"
                                         </a>
                                     </article>
