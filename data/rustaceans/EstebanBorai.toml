@@ -1,0 +1,18 @@
+name = "Esteban"
+gh_user = "EstebanBorai"
+image = "https://avatars.githubusercontent.com/u/13146076?v=4"
+
+[[social_networks]]
+[social_networks.Instagram]
+username = "estebanborai"
+
+[[social_networks]]
+[social_networks.X]
+username = "estebanborai"
+
+[[social_networks]]
+[social_networks.Custom]
+url = "https://estebanborai.com"
+
+[location]
+continent = "SouthAmerica"

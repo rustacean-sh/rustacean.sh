@@ -1,0 +1,21 @@
+[package]
+name = "cli"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "rustacean_sh"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rustacean"
+path = "src/bin/main.rs"
+
+[dependencies]
+anyhow = { workspace = true }
+bincode = { workspace = true }
+clap = { workspace = true, features = ["std", "derive", "env"] }
+toml = { workspace = true }
+
+proto = { workspace = true }
