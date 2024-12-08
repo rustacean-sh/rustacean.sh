@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
+use std::hash::Hash;
 use url::Url;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -6,11 +8,11 @@ pub struct Rustacean<'a> {
     pub name: String,
     pub gh_user: String,
     pub image: Option<&'a str>,
-    pub social_networks: Option<Vec<SocialNetwork>>,
+    pub social_networks: Option<HashSet<SocialNetwork>>,
     pub geographical_location: Option<Location>,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, Eq, PartialEq, Hash)]
 pub enum SocialNetwork {
     Instagram { username: String },
     X { username: String },
