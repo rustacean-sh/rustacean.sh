@@ -7,14 +7,14 @@ pub async fn handler() -> Response {
     let objects = vec![
         Rustacean {
             name: "Esteban Borai".to_string(),
-            image: "https://avatars.githubusercontent.com/u/34756077?v=4".into(),
+            image: Some("https://avatars.githubusercontent.com/u/34756077?v=4".into()),
             gh_user: "https://github.com/EstebanBorai".into(),
             social_networks: None,
             geographical_location: None,
         },
         Rustacean {
             name: "Luciano Ramello".to_string(),
-            image: "https://avatars.githubusercontent.com/u/20213274?v=4".into(),
+            image: Some("https://avatars.githubusercontent.com/u/20213274?v=4".into()),
             gh_user: "https://github.com/luchosr".into(),
             social_networks: None,
             geographical_location: None,
