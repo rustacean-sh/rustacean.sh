@@ -8,12 +8,16 @@ pub async fn handler() -> Response {
         Rustacean {
             name: "Esteban Borai".to_string(),
             image: "https://avatars.githubusercontent.com/u/34756077?v=4".into(),
-            github_url: "https://github.com/EstebanBorai".into(),
+            gh_user: "https://github.com/EstebanBorai".into(),
+            social_networks: None,
+            geographical_location: None,
         },
         Rustacean {
             name: "Luciano Ramello".to_string(),
             image: "https://avatars.githubusercontent.com/u/20213274?v=4".into(),
-            github_url: "https://github.com/luchosr".into(),
+            gh_user: "https://github.com/luchosr".into(),
+            social_networks: None,
+            geographical_location: None,
         },
     ];
 
