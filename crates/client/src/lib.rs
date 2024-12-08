@@ -1,24 +1,42 @@
+use std::collections::BTreeMap;
+
 use leptos::{
-    component, create_rw_signal, spawn_local, view, For, IntoView, Show, SignalGet, SignalSet,
+    component, create_memo, create_rw_signal, spawn_local, view, For, IntoView, Show, SignalGet,
+    SignalSet,
 };
 use leptos_meta::provide_meta_context;
 use reqwest::get;
 
 use proto::Rustacean;
 
+type Database = BTreeMap<String, Rustacean>;
+
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
 
-    let rustaceans = create_rw_signal::<Vec<Rustacean>>(Vec::default());
+    let rustaceans = create_rw_signal::<Database>(BTreeMap::default());
+    let rustaceans_list = create_memo(move |_| {
+        rustaceans
+            .get()
+            .values()
+            .map(|r| r.to_owned())
+            .collect::<Vec<Rustacean>>()
+    });
     let error = create_rw_signal::<Option<String>>(None);
 
     spawn_local(async move {
-        match get("https://api.rustacean.sh/api/v1/rustaceans").await {
-            Ok(res) => match res.json::<Vec<Rustacean>>().await {
-                Ok(items) => {
-                    rustaceans.set(items);
-                }
+        match get("https://rustacean.sh/assets/database/rustaceans.bin").await {
+            Ok(res) => match res.bytes().await {
+                Ok(binary) => match bincode::deserialize::<Database>(&binary) {
+                    Ok(btree) => {
+                        rustaceans.set(btree);
+                    }
+                    Err(err) => {
+                        leptos::logging::error!("Failed to deserialize rustaceans: {:?}", err);
+                        error.set(Some("Failed to deserialize response.".into()));
+                    }
+                },
                 Err(err) => {
                     leptos::logging::error!("Failed to deserialize rustaceans: {:?}", err);
                     error.set(Some("Failed to deserialize response.".into()));
@@ -43,7 +61,7 @@ pub fn App() -> impl IntoView {
                 <ul class="py-4 space-y-4 w-10/12 md:w-[300px] mx-auto">
                     <For
                         key=|rus: &Rustacean| rus.name.clone()
-                        each=move || rustaceans.get()
+                        each=move || rustaceans_list.get()
                         children=move |rus: Rustacean| {
                             view! {
                                 <li class="grid grid-cols-[70px,auto] gap-4">

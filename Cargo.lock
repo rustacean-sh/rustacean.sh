@@ -357,6 +357,7 @@ name = "client"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "bincode",
  "leptos",
  "leptos_meta",
  "leptos_router",
