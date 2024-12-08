@@ -4,10 +4,10 @@ use std::hash::Hash;
 use url::Url;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct Rustacean<'a> {
+pub struct Rustacean {
     pub name: String,
     pub gh_user: String,
-    pub image: Option<&'a str>,
+    pub image: Option<String>,
     pub social_networks: Option<HashSet<SocialNetwork>>,
     pub geographical_location: Option<Location>,
 }
