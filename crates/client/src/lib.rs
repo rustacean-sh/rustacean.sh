@@ -145,7 +145,7 @@ pub fn App() -> impl IntoView {
                             <footer class="mt-auto bg-gray-900 w-full dark:bg-neutral-950">
                             <div class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
 
-                            <p class="text-center text-sm leading-6 text-white">" lets think abaout a footer"
+                            <p class="text-center text-sm leading-6 text-white">" lets think about a footer"
                             </p>
                             </div>
 
