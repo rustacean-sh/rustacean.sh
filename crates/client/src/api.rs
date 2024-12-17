@@ -21,8 +21,11 @@ impl Stars {
             .await?
             .len();
 
+        // let res = reqwest::get(url).await?.text().await?;
+        leptos::logging::log!("Stars: {}", res);
+
         Ok(Stars {
-            amount: Some(res as u64),
+            amount: Some(6 as u64),
         })
     }
 }
