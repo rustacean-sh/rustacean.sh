@@ -61,8 +61,8 @@ pub fn App() -> impl IntoView {
                 leptos::logging::log!("Amount of stars: {:?}", amount);
             }
             Err(err) => {
-                leptos::logging::error!("Failed to fetch resource: {:?}", err);
-                error.set(Some("Failed to fetch resource.".into()));
+                leptos::logging::error!("Failed to fetch Stars amount: {:?}", err);
+                error.set(Some("Failed to fetch Stars amount.".into()));
             }
         }
     });
