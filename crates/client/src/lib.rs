@@ -1,4 +1,7 @@
 use std::collections::BTreeMap;
+mod api;
+
+use api::Stars;
 
 use leptos::{
     component, create_memo, create_rw_signal, spawn_local, view, For, IntoView, Show, SignalGet,
@@ -47,6 +50,19 @@ pub fn App() -> impl IntoView {
             Err(err) => {
                 leptos::logging::error!("Failed to fetch resource: {:?}", err);
                 error.set(Some("Failed to fetch resource.".into()));
+            }
+        }
+    });
+
+    spawn_local(async move {
+        match Stars::get_amount().await {
+            Ok(stars) => {
+                let amount = stars.amount;
+                leptos::logging::log!("Amount of stars: {:?}", amount);
+            }
+            Err(err) => {
+                leptos::logging::error!("Failed to fetch Stars amount: {:?}", err);
+                error.set(Some("Failed to fetch Stars amount.".into()));
             }
         }
     });
