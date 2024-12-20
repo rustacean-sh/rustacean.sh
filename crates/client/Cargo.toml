@@ -21,9 +21,11 @@ leptos_router = { workspace = true, features = ["csr"] }
 reqwest = { workspace = true, features = ["json"] }
 serde = { workspace = true }
 serde_json = { workspace = true }
-
 proto = { workspace = true }
-exitfailure = "0.5.1"
+web-sys.workspace = true
+codee = { workspace = true, features = ["json_serde"] }
+leptos-use = { path = "../..", default-features = false, features = ["storage", "docs"] }
+
 
 [dev-dependencies]
 wasm-bindgen = { workspace = true }
