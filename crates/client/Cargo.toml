@@ -1,3 +1,4 @@
+
 [package]
 name = "client"
 version = "0.0.0"
@@ -22,12 +23,11 @@ reqwest = { workspace = true, features = ["json"] }
 serde = { workspace = true }
 serde_json = { workspace = true }
 proto = { workspace = true }
-web-sys.workspace = true
-codee = { workspace = true, features = ["json_serde"] }
-leptos-use = { path = "../..", default-features = false, features = ["storage", "docs"] }
+web-sys = { version = "0.3.76" ,  features=["Storage", "Window"]}
+
 
 
 [dev-dependencies]
 wasm-bindgen = { workspace = true }
 wasm-bindgen-test = { workspace = true }
-web-sys = { workspace = true }
+web-sys = { workspace = true ,  features=["Storage", "Window"]}
