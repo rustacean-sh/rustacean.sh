@@ -1,18 +1,15 @@
 use std::collections::BTreeMap;
 mod api;
-use codee::string::JsonSerdeCodec;
+use web_sys::window;
 
 use api::Stars;
-use leptos::prelude::*;
-use leptos_use::storage::{use_session_storage};
 
 use leptos::{
-    component, create_memo, create_rw_signal, spawn_local, view, For, IntoView, Show, SignalGet,
-    SignalSet,
+    component, create_memo, create_rw_signal, create_signal, spawn_local, view, For, IntoView,
+    Show, SignalGet, SignalSet,
 };
 use leptos_meta::provide_meta_context;
-use leptos_router::{Route, Router, Routes};
-use serde::{Deserialize, Serialize};
+use leptos_router::Router;
 
 use reqwest::get;
 
@@ -23,10 +20,6 @@ type Database = BTreeMap<String, Rustacean>;
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
-    let (storage_key, set_storage_key) = signal("stargazers_count".to_string());
-
-    let (repo_stars, set_repo_stars, reset) =
-        use_session_storage::<Stars, JsonSerdeCodec>(storage_key);
 
     let rustaceans = create_rw_signal::<Database>(BTreeMap::default());
     let rustaceans_list = create_memo(move |_| {
@@ -62,22 +55,41 @@ pub fn App() -> impl IntoView {
         }
     });
 
-    spawn_local(async move {
-        if repo_stars.get() == None {
-            // match Stars::get_amount().await {
-            //     Ok(stars) => {
-            //         let amount = stars.amount;
-            //         set_repo_stars.set(amount.unwrap_or(0));
-            //         leptos::logging::log!("Amount of stars from spawn local: {:?}", amount);
-            //         set_repo_stars.set(stars.amount.unwrap_or(0));
-            //     }
-            //     Err(err) => {
-            //         leptos::logging::error!("Failed to fetch Stars amount: {:?}", err);
-            //         error.set(Some("Failed to fetch Stars amount.".into()));
-            //     }
-            // }
+    let session_storage = window().unwrap().session_storage().unwrap();
+    let repo_stars = session_storage.unwrap().get_item("repo_stars").unwrap();
 
-            leptos::logging::log!("Amount of stars from spawn local: 0");
+    let (stars_count, set_stars_count) = create_signal(1);
+
+    spawn_local(async move {
+        if repo_stars.is_some() {
+            leptos::logging::log!(
+                "There is a value in session storage {:?}",
+                repo_stars.unwrap()
+            );
+        } else {
+            leptos::logging::log!("There is no value in session storage");
+
+            match Stars::get_amount().await {
+                Ok(stars) => {
+                    let amount = stars.amount;
+                    leptos::logging::log!("Amount of stars: {:?}", amount);
+
+                    match window().unwrap().session_storage().unwrap().as_ref() {
+                        Some(session_storage) => {
+                            session_storage
+                                .set_item("repo_stars", &amount.unwrap().to_string())
+                                .unwrap();
+                        }
+                        None => {
+                            leptos::logging::log!("Unable to set stars in storage");
+                        }
+                    }
+                }
+                Err(err) => {
+                    leptos::logging::error!("Failed to fetch Stars amount: {:?}", err);
+                    error.set(Some("Failed to fetch Stars amount.".into()));
+                }
+            }
         }
     });
 
@@ -103,7 +115,7 @@ pub fn App() -> impl IntoView {
         </figure>
     <span class="border-r border-gray-300 px-1">Star</span>
 
-               {repo_stars}          </a>
+           {stars_count}          </a>
 
 
 
@@ -181,6 +193,6 @@ pub fn App() -> impl IntoView {
 
 
                 </footer>
-                            </Router>
+                </Router>
                         }
 }
