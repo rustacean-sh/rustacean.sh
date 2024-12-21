@@ -14,9 +14,27 @@ pub struct Rustacean {
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, Eq, PartialEq, Hash)]
+#[serde(tag = "type", content = "meta")]
 pub enum SocialNetwork {
+    /// https://www.discourse.org
+    Discourse { username: String },
+    /// Any email address
+    Email { username: String },
+    /// https://www.instagram.com
     Instagram { username: String },
+    /// https://www.reddit.com
+    Reddit { username: String },
+    /// https://www.threads.net
+    Threads { username: String },
+    /// https://bsky.app
+    BlueSky { username: String },
+    /// https://mastodon.social/explore
+    Mastodon { username: String },
+    /// https://weird.one
+    Weird { username: String },
+    /// https://x.com
     X { username: String },
+    /// Custom public source of contact
     Custom { url: Url },
 }
 
