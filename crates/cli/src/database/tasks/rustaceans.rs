@@ -3,7 +3,7 @@ use std::fs::{read_dir, read_to_string, write};
 use std::path::{Path, PathBuf};
 
 use anyhow::Result;
-use proto::Rustacean;
+use proto::rustacean::{Rustacean, RustaceanExt};
 
 pub struct RustaceansTask {
     input_dir: PathBuf,
@@ -32,7 +32,7 @@ impl RustaceansTask {
 
         for toml_file in toml_files {
             let content = read_to_string(&toml_file)?;
-            let rustacean = toml::from_str::<Rustacean>(&content)?;
+            let rustacean = Rustacean::from_toml(&content)?;
 
             rustaceans.insert(rustacean.gh_user.clone(), rustacean);
         }

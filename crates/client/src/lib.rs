@@ -11,7 +11,7 @@ use leptos::{
 use leptos_meta::provide_meta_context;
 use leptos_router::Router;
 
-use proto::Rustacean;
+use proto::rustacean::Rustacean;
 
 use self::components::atoms::github_stars::GitHubStars;
 use self::services::Services;

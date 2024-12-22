@@ -3,15 +3,15 @@ gh_user = "EstebanBorai"
 image = "https://avatars.githubusercontent.com/u/34756077?v=4"
 
 [[social_networks]]
-[social_networks.Instagram]
-username = "estebanborai"
+type = "X"
+
+[social_networks.meta]
+username = "EstebanBorai"
 
 [[social_networks]]
-[social_networks.X]
-username = "estebanborai"
+type = "Custom"
 
-[[social_networks]]
-[social_networks.Custom]
+[social_networks.meta]
 url = "https://estebanborai.com"
 
 [location]

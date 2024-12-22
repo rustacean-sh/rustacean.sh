@@ -3,15 +3,21 @@ gh_user = "luchosr"
 image = "https://avatars.githubusercontent.com/u/20213274?v=4"
 
 [[social_networks]]
-[social_networks.Instagram]
+type = "Instagram"
+
+[social_networks.meta]
 username = "lucianobenj"
 
 [[social_networks]]
-[social_networks.X]
+type = "X"
+
+[social_networks.meta]
 username = "luchosr10"
 
 [[social_networks]]
-[social_networks.Custom]
+type = "Custom"
+
+[social_networks.meta]
 url = "https://lucianoramello.com"
 
 [location]
