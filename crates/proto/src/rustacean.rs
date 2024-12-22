@@ -15,7 +15,6 @@ pub struct Rustacean {
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, Eq, PartialEq, Hash)]
-#[serde(tag = "type", content = "meta")]
 pub enum SocialNetwork {
     /// https://www.discourse.org
     Discourse { username: String },
@@ -122,15 +121,13 @@ gh_user = "johnapple"
 image = "https://avatars.githubusercontent.com/u/1?v=4"
 
 [[social_networks]]
-type = "Custom"
 
-[social_networks.meta]
+[social_networks.Custom]
 url = "https://example.com/"
 
 [[social_networks]]
-type = "BlueSky"
 
-[social_networks.meta]
+[social_networks.BlueSky]
 username = "johnapple"
 
 [location]
