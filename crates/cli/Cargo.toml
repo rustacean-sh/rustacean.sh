@@ -16,6 +16,5 @@ path = "src/bin/main.rs"
 anyhow = { workspace = true }
 bincode = { workspace = true }
 clap = { workspace = true, features = ["std", "derive", "env"] }
-toml = { workspace = true }
 
 proto = { workspace = true }

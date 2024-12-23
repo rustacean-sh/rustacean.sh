@@ -3,7 +3,7 @@ use std::collections::BTreeMap;
 use anyhow::Result;
 use reqwest::Url;
 
-use proto::Rustacean;
+use proto::rustacean::Rustacean;
 
 use crate::utils::browser::hostname;
 

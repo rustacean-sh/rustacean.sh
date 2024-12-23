@@ -1,7 +1,7 @@
 use axum::response::{IntoResponse, Response};
 use axum::Json;
 
-use proto::Rustacean;
+use proto::rustacean::Rustacean;
 
 pub async fn handler() -> Response {
     let objects = vec![
