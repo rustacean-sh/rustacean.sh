@@ -7,9 +7,10 @@ use web_sys::window;
 pub fn GitHubStars() -> impl IntoView {
     let gh_stars = create_rw_signal::<u32>(0);
 
+    let session_storage = window().unwrap().session_storage().unwrap();
+    let repo_stars = session_storage.unwrap().get_item("repo_stars").unwrap();
+
     spawn_local(async move {
-        let session_storage = window().unwrap().session_storage().unwrap();
-        let repo_stars = session_storage.unwrap().get_item("repo_stars").unwrap();
         let services = Services::new();
 
         if repo_stars.is_some() {
@@ -19,8 +20,8 @@ pub fn GitHubStars() -> impl IntoView {
             );
         } else {
             match services.github().get_stars().await {
-                Ok(github_stars) => {
-                    gh_stars.set(github_stars.stars.unwrap());
+                Ok(github_option) => {
+                    gh_stars.set(github_option.stars.unwrap());
                     leptos::logging::log!("buscando las stars desde el atom");
                 }
                 Err(err) => {
