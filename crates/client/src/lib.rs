@@ -6,8 +6,6 @@ use std::collections::BTreeMap;
 mod api;
 use web_sys::window;
 
-use api::Stars;
-
 use leptos::{
     component, create_memo, create_rw_signal, create_signal, spawn_local, view, For, IntoView,
     Show, SignalGet, SignalSet,
@@ -46,43 +44,46 @@ pub fn App() -> impl IntoView {
         }
     });
 
-    let session_storage = window().unwrap().session_storage().unwrap();
-    let repo_stars = session_storage.unwrap().get_item("repo_stars").unwrap();
+    // let session_storage = window().unwrap().session_storage().unwrap();
+    // let repo_stars = session_storage.unwrap().get_item("repo_stars").unwrap();
 
-    let (stars_count, set_stars_count) = create_signal(1);
+    // let (stars_count, set_stars_count) = create_signal(1);
 
-    spawn_local(async move {
-        if repo_stars.is_some() {
-            leptos::logging::log!(
-                "There is a value in session storage {:?}",
-                repo_stars.unwrap()
-            );
-        } else {
-            leptos::logging::log!("There is no value in session storage");
+    // spawn_local(async move {
+    //     if repo_stars.is_some() {
+    //         leptos::logging::log!(
+    //             "There is a value in session storage {:?}",
+    //             repo_stars.unwrap()
+    //         );
+    //     } else {
+    //         leptos::logging::log!("There is no value in session storage");
+    //         let services = Services::new();
 
-            match Stars::get_amount().await {
-                Ok(stars) => {
-                    let amount = stars.amount;
-                    leptos::logging::log!("Amount of stars: {:?}", amount);
+    //         let Github = services.github();
 
-                    match window().unwrap().session_storage().unwrap().as_ref() {
-                        Some(session_storage) => {
-                            session_storage
-                                .set_item("repo_stars", &amount.unwrap().to_string())
-                                .unwrap();
-                        }
-                        None => {
-                            leptos::logging::log!("Unable to set stars in storage");
-                        }
-                    }
-                }
-                Err(err) => {
-                    leptos::logging::error!("Failed to fetch Stars amount: {:?}", err);
-                    error.set(Some("Failed to fetch Stars amount.".into()));
-                }
-            }
-        }
-    });
+    //         match Github.get_stars().await {
+    //             Ok(stars) => {
+    //                 let amount = stars;
+    //                 leptos::logging::log!("Amount of stars: {:?}", amount);
+
+    //                 match window().unwrap().session_storage().unwrap().as_ref() {
+    //                     Some(session_storage) => {
+    //                         session_storage
+    //                             .set_item("repo_stars", &format!("{:?}", amount))
+    //                             .unwrap();
+    //                     }
+    //                     None => {
+    //                         leptos::logging::log!("Unable to set stars in storage");
+    //                     }
+    //                 }
+    //             }
+    //             Err(err) => {
+    //                 leptos::logging::error!("Failed to fetch Stars amount: {:?}", err);
+    //                 error.set(Some("Failed to fetch Stars amount.".into()));
+    //             }
+    //         }
+    //     }
+    // });
 
     view! {
             <header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full ">

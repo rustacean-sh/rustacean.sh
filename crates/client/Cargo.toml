@@ -30,4 +30,3 @@ web-sys = { version = "0.3.76" ,  features=["Storage", "Window"]}
 [dev-dependencies]
 wasm-bindgen = { workspace = true }
 wasm-bindgen-test = { workspace = true }
-web-sys = { workspace = true ,  features=["Storage", "Window"]}
