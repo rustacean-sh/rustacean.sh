@@ -1,8 +1,12 @@
 mod api;
 mod github;
+mod session_cache;
+
+use std::rc::Rc;
 
 use self::api::Api;
 use self::github::GitHub;
+use self::session_cache::SessionCache;
 
 pub struct Services {
     api: Api,
@@ -17,9 +21,12 @@ impl Default for Services {
 
 impl Services {
     pub fn new() -> Self {
+        let ss_cache = SessionCache::default();
+        let ss_cache = Rc::new(ss_cache);
+
         Self {
-            api: Api::new(),
-            github: GitHub::default(),
+            api: Api::new(Rc::clone(&ss_cache)),
+            github: GitHub::new(Rc::clone(&ss_cache)),
         }
     }
 
