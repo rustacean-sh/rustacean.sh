@@ -3,12 +3,10 @@ pub mod services;
 pub mod utils;
 
 use std::collections::BTreeMap;
-mod api;
-use web_sys::window;
 
 use leptos::{
-    component, create_memo, create_rw_signal, create_signal, spawn_local, view, For, IntoView,
-    Show, SignalGet, SignalSet,
+    component, create_memo, create_rw_signal, spawn_local, view, For, IntoView, Show, SignalGet,
+    SignalSet,
 };
 use leptos_meta::provide_meta_context;
 
@@ -44,47 +42,6 @@ pub fn App() -> impl IntoView {
         }
     });
 
-    // let session_storage = window().unwrap().session_storage().unwrap();
-    // let repo_stars = session_storage.unwrap().get_item("repo_stars").unwrap();
-
-    // let (stars_count, set_stars_count) = create_signal(1);
-
-    // spawn_local(async move {
-    //     if repo_stars.is_some() {
-    //         leptos::logging::log!(
-    //             "There is a value in session storage {:?}",
-    //             repo_stars.unwrap()
-    //         );
-    //     } else {
-    //         leptos::logging::log!("There is no value in session storage");
-    //         let services = Services::new();
-
-    //         let Github = services.github();
-
-    //         match Github.get_stars().await {
-    //             Ok(stars) => {
-    //                 let amount = stars;
-    //                 leptos::logging::log!("Amount of stars: {:?}", amount);
-
-    //                 match window().unwrap().session_storage().unwrap().as_ref() {
-    //                     Some(session_storage) => {
-    //                         session_storage
-    //                             .set_item("repo_stars", &format!("{:?}", amount))
-    //                             .unwrap();
-    //                     }
-    //                     None => {
-    //                         leptos::logging::log!("Unable to set stars in storage");
-    //                     }
-    //                 }
-    //             }
-    //             Err(err) => {
-    //                 leptos::logging::error!("Failed to fetch Stars amount: {:?}", err);
-    //                 error.set(Some("Failed to fetch Stars amount.".into()));
-    //             }
-    //         }
-    //     }
-    // });
-
     view! {
             <header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full ">
                 <nav class="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-6 md:px-8 mx-auto">
@@ -97,7 +54,7 @@ pub fn App() -> impl IntoView {
                         </a>
                         //   <!-- End Logo -->
                     </div>
-                    <GitHubStars />
+                     <GitHubStars />
 
                 </nav>
             </header>

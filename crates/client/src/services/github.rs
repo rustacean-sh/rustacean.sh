@@ -1,29 +1,39 @@
 use anyhow::Result;
 use reqwest::Url;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
-pub struct GitHub {
-    pub stars: Option<u32>,
+use super::session_cache::{SessionCacheKey, SharedSessionCache};
+
+#[derive(Deserialize, Serialize)]
+pub struct GitHubRepository {
+    pub name: String,
+    pub stargazers_count: u32,
 }
 
-impl Default for GitHub {
-    fn default() -> Self {
-        Self::new()
-    }
+pub struct GitHub {
+    ss_cache: SharedSessionCache,
 }
 
 impl GitHub {
-    pub fn new() -> Self {
-        Self { stars: None }
+    pub fn new(ss_cache: SharedSessionCache) -> Self {
+        Self { ss_cache }
     }
-    pub async fn get_stars(&self) -> Result<Self> {
-        let url = "https://api.github.com/repos/rustacean-sh/rustacean.sh";
-        let url = Url::parse(&*url)?;
-        let res = reqwest::get(url).await?.text().await?;
-        let v: GitHub = serde_json::from_str(res.as_str())?;
 
-        Ok(GitHub { stars: v.stars })
-        // Ok(v.stars.unwrap())
+    pub async fn get_stars(&self) -> Result<GitHubRepository> {
+        if let Ok(Some(gh_repo)) = self
+            .ss_cache
+            .get::<GitHubRepository>(&SessionCacheKey::GitHubStars)
+        {
+            return Ok(gh_repo);
+        }
+
+        let url = Url::parse("https://api.github.com/repos/rustacean-sh/rustacean.sh")?;
+        let gh_repo = reqwest::get(url).await?.json::<GitHubRepository>().await?;
+
+        if let Err(err) = self.ss_cache.set(&SessionCacheKey::GitHubStars, &gh_repo) {
+            leptos::logging::error!("Failed to caché GitHub Repository: {err}");
+        }
+
+        Ok(gh_repo)
     }
 }

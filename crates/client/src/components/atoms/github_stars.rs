@@ -1,27 +1,21 @@
-use leptos::{component, create_rw_signal, spawn_local, view, IntoView, SignalGet, SignalSet};
+use leptos::{
+    component, create_render_effect, create_rw_signal, spawn_local, view, IntoView, SignalGet,
+    SignalSet,
+};
 
 use crate::services::Services;
-use web_sys::window;
 
 #[component]
 pub fn GitHubStars() -> impl IntoView {
     let gh_stars = create_rw_signal::<u32>(0);
 
-    let session_storage = window().unwrap().session_storage().unwrap();
-    let repo_stars = session_storage.unwrap().get_item("repo_stars").unwrap();
+    create_render_effect(move |_| {
+        spawn_local(async move {
+            let services = Services::new();
 
-    spawn_local(async move {
-        let services = Services::new();
-
-        if repo_stars.is_some() {
-            leptos::logging::log!(
-                "There is a value in session storage from atoms {:?}",
-                repo_stars.unwrap()
-            );
-        } else {
             match services.github().get_stars().await {
                 Ok(github_option) => {
-                    gh_stars.set(github_option.stars.unwrap());
+                    gh_stars.set(github_option.stargazers_count);
                     leptos::logging::log!("buscando las stars desde el atom");
                 }
                 Err(err) => {
@@ -29,7 +23,7 @@ pub fn GitHubStars() -> impl IntoView {
                     // error.set(Some(err.to_string()));
                 }
             }
-        }
+        });
     });
 
     view! {
@@ -40,6 +34,7 @@ pub fn GitHubStars() -> impl IntoView {
             </figure>
             <span class="border-r border-gray-300 px-1">"Star"</span>
                 {move || gh_stars.get()}
+
             </a>
         </div>
     }
