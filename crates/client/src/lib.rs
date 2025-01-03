@@ -10,10 +10,10 @@ use leptos::{
 };
 use leptos_meta::provide_meta_context;
 
+use self::services::Services;
 use proto::rustacean::Rustacean;
 
-use self::components::atoms::github_stars::GitHubStars;
-use self::services::Services;
+use components::organisms::header::Header;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -43,21 +43,8 @@ pub fn App() -> impl IntoView {
     });
 
     view! {
-            <header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full ">
-                <nav class="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-6 md:px-8 mx-auto">
-                    <div class="md:col-span-3">
-                        //   <!-- Logo -->
-                        <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
-                            <figure class=" rounded-full overflow-hidden">
-                                <img  height="110" width="110" src={"../assets/images/rustacean-flat-happy.svg"} alt={"Ferris, the crab"} />
-                            </figure>
-                        </a>
-                        //   <!-- End Logo -->
-                    </div>
-                     <GitHubStars />
 
-                </nav>
-            </header>
+            <Header/>
             <main class="flex flex-col justify-start items-center bg-gray-800 text-white h-screen font-bold">
                 <h1 class="text-2xl py-4">"rustacean.sh"</h1>
                 <p>"The Rustacean Hub, for contributors, projects and news."</p>
