@@ -3,7 +3,7 @@ use leptos::{
     SignalSet,
 };
 
-use crate::services::Services;
+use crate::{components::atoms::icons::Star, services::Services};
 
 #[component]
 pub fn GitHubStars() -> impl IntoView {
@@ -26,15 +26,18 @@ pub fn GitHubStars() -> impl IntoView {
     });
 
     view! {
-         <div id="github-stars" class="flex items-center gap-x-1 md:gap-x-2 ms-auto py-1 md:ps-6 md:order-3 md:col-span-3">
-            <a href="https://github.com/rustacean-sh/rustacean.sh"  target="_blank" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-md bg-white border border-gray-200 text-black hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none ">
-            <figure >
-                <img  height="15" width="15" src={"../assets/images/star-svgrepo-com.svg"} alt={"Star in github"} />
+        <a class="rsh-btn rsh-btn-secondary" href="https://github.com/rustacean-sh/rustacean.sh" target="_blank">
+            <figure class="mr-2">
+                <Star class="h-4 w-4 text-yellow-600" />
             </figure>
-            <span class="border-r border-gray-300 px-1">"Star"</span>
-                {move || gh_stars.get()}
-
-            </a>
-        </div>
+            <article class="flex">
+                <span class="mr-1">
+                    "Star"
+                </span>
+                <span>
+                    {move || gh_stars.get()}
+                </span>
+            </article>
+        </a>
     }
 }

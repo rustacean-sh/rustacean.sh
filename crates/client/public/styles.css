@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-rhs-orange-900 text-white;
+}
+
+.rsh-btn {
+    @apply flex items-center font-mono rounded-sm;
+    @apply font-light text-xs uppercase px-2 py-1;
+}
+
+.rsh-btn-primary {
+    @apply bg-rhs-orange-700 text-rhs-orange-200;
+}
+
+.rsh-btn-primary:hover {
+    @apply bg-rhs-orange-600 text-rhs-orange-100 cursor-pointer;
+}
+
+.rsh-btn-secondary {
+    @apply bg-gray-900 text-gray-200;
+}
+
+.rsh-btn-secondary:hover {
+    @apply bg-gray-800 text-gray-100 cursor-pointer;
+}
+
+#global-nav a {
+    @apply py-0.5 px-1 rounded-sm;
+
+    -webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+}
+
+#global-nav a:hover {
+    @apply bg-rhs-orange-600;
+}
+
+#global-nav a[aria-current="page"] {
+    @apply bg-rhs-orange-800 text-rhs-orange-100;
+}
+
+.safe-zone {
+    @apply py-2 px-4 md:px-2 mx-auto w-full md:max-w-[1200px];
+}
