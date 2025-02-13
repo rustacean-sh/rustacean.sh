@@ -36,8 +36,8 @@ pub fn Members() -> impl IntoView {
 
     view! {
         <article class="safe-zone py-4">
-            <h2 class="text-xl pb-2 underline">"Find Community Members"</h2>
-            <p>
+            <h2 class="text-xl pb-2 underline">"Members"</h2>
+            <p class="text-sm w-2/3">
                 "People listed here form part of the Rustacean.sh Community, people from around the globe willing to share experience and participate on Rust projects."
             </p>
         </article>
