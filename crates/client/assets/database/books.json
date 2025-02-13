@@ -1,0 +1,29 @@
+[
+  {
+    "name": "The Rust Programming Language",
+    "author": "Steve Klabnik & Carol Nichols",
+    "url": "https://doc.rust-lang.org/book/",
+    "cover": "https://pictures.abebooks.com/isbn/9781593278281-us-300.jpg",
+    "description": "The Rust Programming Language is the official book on Rust, an open-source, community-developed systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety. This is the undisputed go-to guide to Rust, written by two members of the Rust core team, with feedback and contributions from 42 members of the community. The book assumes that you've written code in another programming language but makes no assumptions about which one, meaning the material is accessible and useful to developers from a wide variety of programming backgrounds.",
+    "isbn_13": "978-1593278281",
+    "tags": ["rust", "junior", "open-source"]
+  },
+  {
+    "name": "Rust for Rustaceans",
+    "author": "Jon Gjengset",
+    "url": "https://nostarch.com/rust-rustaceans",
+    "cover": "https://pictures.abebooks.com/isbn/9781718501850-us-300.jpg",
+    "description": "For developers who’ve mastered the basics, this book is the next step on your way to professional-level programming in Rust. It covers everything you need to build and maintain larger code bases, write powerful and flexible applications and libraries, and confidently expand the scope and complexity of your projects.",
+    "isbn_13": "978-1718501850",
+    "tags": ["rust", "senior"]
+  },
+  {
+    "name": "Rust in Action",
+    "author": "Tim McNamara",
+    "url": "https://www.manning.com/books/rust-in-action",
+    "cover": "https://pictures.abebooks.com/isbn/9781617294556-us-300.jpg",
+    "description": "Rust in Action introduces the Rust programming language by exploring numerous systems programming concepts and techniques. You'll be learning Rust by delving into how computers work under the hood. You'll find yourself playing with persistent storage, memory, networking and even tinkering with CPU instructions. The book takes you through using Rust to extend other applications and teaches you tricks to write blindingly fast code. You'll also discover parallel and concurrent programming. Filled to the brim with real-life use cases and scenarios, you'll go beyond the Rust syntax and see what Rust has to offer in real-world use cases.",
+    "isbn_13": "978-1617294556 ",
+    "tags": ["rust", "semi-senior", "systems"]
+  }
+]

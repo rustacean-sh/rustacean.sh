@@ -6,6 +6,7 @@ pub mod utils;
 use leptos::{component, view, IntoView};
 use leptos_meta::provide_meta_context;
 use leptos_router::{Route, Router, Routes};
+use pages::Books;
 
 use self::components::templates::website::Website;
 use self::pages::About;
@@ -21,6 +22,7 @@ pub fn App() -> impl IntoView {
             <Routes>
                 <Route path="/" view=Website>
                     <Route path="/" view=Members />
+                    <Route path="/books" view=Books />
                     <Route path="/about" view=About />
                 </Route>
                 <Route path="/*" view=NotFound />

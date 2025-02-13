@@ -1,16 +1,19 @@
-mod api;
-mod github;
-mod session_cache;
+pub mod api;
+pub mod github;
+pub mod session_cache;
+pub mod static_assets;
 
 use std::rc::Rc;
 
 use self::api::Api;
 use self::github::GitHub;
 use self::session_cache::SessionCache;
+use self::static_assets::StaticAssets;
 
 pub struct Services {
     api: Api,
     github: GitHub,
+    assets: StaticAssets,
 }
 
 impl Default for Services {
@@ -27,6 +30,7 @@ impl Services {
         Self {
             api: Api::new(Rc::clone(&ss_cache)),
             github: GitHub::new(Rc::clone(&ss_cache)),
+            assets: StaticAssets::new(Rc::clone(&ss_cache)),
         }
     }
 
@@ -38,5 +42,10 @@ impl Services {
     #[inline]
     pub fn github(&self) -> &GitHub {
         &self.github
+    }
+
+    #[inline]
+    pub fn assets(&self) -> &StaticAssets {
+        &self.assets
     }
 }

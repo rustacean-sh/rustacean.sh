@@ -11,6 +11,7 @@ pub type SharedSessionCache = Rc<SessionCache>;
 pub enum SessionCacheKey {
     Rustacean,
     GitHubStars,
+    Books,
 }
 
 impl Display for SessionCacheKey {
@@ -18,6 +19,7 @@ impl Display for SessionCacheKey {
         match self {
             Self::Rustacean => write!(f, "rustacean"),
             Self::GitHubStars => write!(f, "github_stars"),
+            Self::Books => write!(f, "books"),
         }
     }
 }

@@ -23,6 +23,7 @@ pub fn NavigationBar() -> impl IntoView {
             </div>
             <div id="global-nav" class="font-mono flex items-center justify-center gap-x-4 py-2 px-4 md:px-2 mx-auto w-full md:max-w-[1200px] text-xs uppercase">
                 <A href="/">"Members"</A>
+                <A href="/books">"Books"</A>
                 <A href="/about">"About"</A>
             </div>
         </nav>
